@@ -1,0 +1,26 @@
+# Setup Ubuntu 16.04 with Docker / docker-compose, and proxy support
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "xenial"
+  config.vm.box_url = "https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-vagrant.box"
+
+  if Vagrant.has_plugin?("vagrant-proxyconf")
+    config.proxy.http     = ENV['http_proxy'] || ""
+    config.proxy.https    = ENV['https_proxy'] || ""
+    config.proxy.no_proxy = "localhost,127.0.0.1,.hpecorp.net"
+  end
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 2048
+    v.cpus = 2
+  end
+
+  config.vm.network "forwarded_port", guest: 8080, host: 8080
+
+  config.vm.provision "shell",
+    path: "scripts/provision.sh" ,
+    privileged: false
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+end
