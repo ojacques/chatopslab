@@ -14,5 +14,5 @@ which docker-compose || {
 }
 
 git clone https://github.com/ojacques/chatopslab.git
-cd chatopslab/compose
+cd chatopslab/app
 docker-compose build
