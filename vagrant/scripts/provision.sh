@@ -15,4 +15,4 @@ which docker-compose || {
 
 git clone https://github.com/ojacques/chatopslab.git
 cd chatopslab/app
-docker-compose build
+docker-compose create
