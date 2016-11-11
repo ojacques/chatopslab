@@ -18,4 +18,13 @@ vi .env
 ```
 ./start.sh
 ```
+- Start the docker-compose monitoring
+```
+./scripts/bin/monitor-compose.sh
+```
+- In chat, subscribe to "docker" events
+```
+@mybot subscribe docker
+```
+
 
