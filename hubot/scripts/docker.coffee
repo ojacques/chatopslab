@@ -31,3 +31,6 @@ runCommand = (msg, cmd) ->
     if error
       msg.send error
       msg.send stderr
+    else
+      if !!stdout
+        msg.send '```' + stdout + '```'
