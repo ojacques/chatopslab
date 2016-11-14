@@ -19,9 +19,9 @@ module.exports = (robot) ->
         runCommand msg, 'cd ~/chatopslab/app/;docker-compose restart'
       when 'stop'
         msg.send "Stopping everything! :cold_sweat:"
-        runCommand msg, 'cd ~/chatopslab/app/;docker-compose restart'
+        runCommand msg, 'cd ~/chatopslab/app/;docker-compose stop'
       when 'start'
-        msg.send "Gentlemen, start your enginge! :checkered_flag:"
+        msg.send "Folks, start your engine! :checkered_flag:"
         runCommand msg, 'cd ~/chatopslab/app/;docker-compose start'
 
 # Run a shell command
@@ -31,5 +31,3 @@ runCommand = (msg, cmd) ->
     if error
       msg.send error
       msg.send stderr
-    else
-      msg.send '```' + stdout + '```'
