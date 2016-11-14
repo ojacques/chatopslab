@@ -26,5 +26,6 @@ vi .env
 ```
 @mybot subscribe docker
 ```
-
+- Run commands
+![dockercomposeps.jpg](/img/dockercomposeps.jpg)
 
