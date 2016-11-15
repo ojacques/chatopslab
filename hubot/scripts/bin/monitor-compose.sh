@@ -9,10 +9,10 @@ while read line ; do
   message=""
   case $action in
     kill)
-      message=":heavy_exclamation_mark::whale: Docker container *$name* killed" 
+      message=""
       ;;
     die)
-      message=":heavy_exclamation_mark::whale: Docker container *$name* died" 
+      message=""
       ;;
     stop)
       message=":heavy_exclamation_mark::whale: Docker container *$name* stopped" 
