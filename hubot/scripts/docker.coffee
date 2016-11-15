@@ -1,5 +1,5 @@
 # Description:
-#   Monitors docker-compose events, publish them using pubsub.
+#   Execute docker-compose actions
 #
 # Commands:
 #   hubot docker ps - shows application's docker containers
@@ -8,7 +8,6 @@
 
 module.exports = (robot) ->
   robot.respond /docker (.*)/i, (msg) ->
-    @exec = require('child_process').exec
     command = msg.match[1]
     switch command
       when 'ps'
