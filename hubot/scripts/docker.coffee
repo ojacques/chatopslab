@@ -1,5 +1,5 @@
 # Description:
-#   Monitors docker-compose events, publish them using pubsub.
+#   Execute docker-compose actions
 #
 # Commands:
 #   hubot docker ps - shows application's docker containers
@@ -8,7 +8,6 @@
 
 module.exports = (robot) ->
   robot.respond /docker (.*)/i, (msg) ->
-    @exec = require('child_process').exec
     command = msg.match[1]
     switch command
       when 'ps'
@@ -19,9 +18,9 @@ module.exports = (robot) ->
         runCommand msg, 'cd ~/chatopslab/app/;docker-compose restart'
       when 'stop'
         msg.send "Stopping everything! :cold_sweat:"
-        runCommand msg, 'cd ~/chatopslab/app/;docker-compose restart'
+        runCommand msg, 'cd ~/chatopslab/app/;docker-compose stop'
       when 'start'
-        msg.send "Gentlemen, start your enginge! :checkered_flag:"
+        msg.send "Folks, start your engine! :checkered_flag:"
         runCommand msg, 'cd ~/chatopslab/app/;docker-compose start'
 
 # Run a shell command
@@ -32,4 +31,5 @@ runCommand = (msg, cmd) ->
       msg.send error
       msg.send stderr
     else
-      msg.send '```' + stdout + '```'
+      if !!stdout
+        msg.send '```' + stdout + '```'
