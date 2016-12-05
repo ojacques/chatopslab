@@ -4,6 +4,7 @@
 # Commands:
 #   hubot docker ps - shows application's docker containers
 #   hubot docker start/stop/restart - manage the application
+#   app logs on <cart/catalog/mongodb/navigation/product/redis/shop> for <N> lines
 #
 
 module.exports = (robot) ->
@@ -39,4 +40,4 @@ runCommand = (msg, cmd) ->
       msg.send stderr
     else
       if !!stdout
-        msg.send '```' + stdout + '```'
+        msg.send "```\n" + stdout + "\n```"
