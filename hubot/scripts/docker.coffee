@@ -4,6 +4,7 @@
 # Commands:
 #   hubot docker ps - shows application's docker containers
 #   hubot docker start/stop/restart - manage the application
+#   app logs on <cart/catalog/mongodb/navigation/product/redis/shop> for <N> lines
 #
 
 module.exports = (robot) ->
@@ -22,6 +23,13 @@ module.exports = (robot) ->
       when 'start'
         msg.send "Folks, start your engine! :checkered_flag:"
         runCommand msg, 'cd ~/chatopslab/app/;docker-compose start'
+  robot.respond /app logs on (.*) for (.*) lines/i, (msg) ->
+    app = msg.match[1]
+    lines = msg.match[2]
+    switch app
+      when 'cart', 'catalog', 'mongodb', 'navigation', 'product', 'redis', 'shop'
+        msg.send "Folks, time to debug! Showing " + lines + " lines on " + app
+        runCommand msg, 'docker logs app_' + app + '_1 --tail ' + lines
 
 # Run a shell command
 runCommand = (msg, cmd) ->
@@ -32,4 +40,4 @@ runCommand = (msg, cmd) ->
       msg.send stderr
     else
       if !!stdout
-        msg.send '```' + stdout + '```'
+        msg.send "```\n" + stdout + "\n```"
