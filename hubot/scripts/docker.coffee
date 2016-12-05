@@ -26,9 +26,9 @@ module.exports = (robot) ->
     app = msg.match[1]
     lines = msg.match[2]
     switch app
-      when 'cart'
-        msg.send "Folks, time to debug!"
-        runCommand msg, 'docker logs app_' + cart + '_1 --tail ' + lines
+      when 'cart', 'catalog', 'mongodb', 'navigation', 'product', 'redis', 'shop'
+        msg.send "Folks, time to debug! Showing " + lines + " lines on " + app
+        runCommand msg, 'docker logs app_' + app + '_1 --tail ' + lines
 
 # Run a shell command
 runCommand = (msg, cmd) ->
