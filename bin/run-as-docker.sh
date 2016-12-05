@@ -7,4 +7,4 @@ then
    INSTANCE_FLAG="-e INSTANCE=$1"
 fi
 
-sudo docker run -it -v /var/run/docker.sock:/var/run/docker.sock -e DOOD_PWD=$(pwd) $INSTANCE_FLAG --rm hubotchatlab:0.1
+sudo docker run -it -v /var/run/docker.sock:/var/run/docker.sock -e DOOD_PWD=$(pwd)/app $INSTANCE_FLAG --rm hubotchatlab:0.1

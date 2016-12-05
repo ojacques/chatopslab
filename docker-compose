@@ -33,10 +33,10 @@ fi
 # Setup volume mounts for compose config and context
 if [ "$DOOD_PWD" = "" ]; then
     if [ "$(pwd)" != '/' ]; then
-        VOLUMES="-v $(pwd):$(pwd)"
+        VOLUMES="-v $(pwd):$(pwd) -w '$(pwd)'"
     fi
 else
-        VOLUMES="-v $DOOD_PWD:$DOOD_PWD"
+        VOLUMES="-v $DOOD_PWD:$DOOD_PWD -w '$DOOD_PWD'"
 fi
 if [ -n "$COMPOSE_FILE" ]; then
     compose_dir=$(dirname $COMPOSE_FILE)
@@ -57,4 +57,4 @@ if [ -t 0 ]; then
     DOCKER_RUN_OPTIONS="$DOCKER_RUN_OPTIONS -i"
 fi
 
-exec docker run --rm $DOCKER_RUN_OPTIONS $DOCKER_ADDR $COMPOSE_OPTIONS $VOLUMES -w "$(pwd)" $IMAGE "$@"
+exec docker run --rm $DOCKER_RUN_OPTIONS $DOCKER_ADDR $COMPOSE_OPTIONS $VOLUMES $IMAGE "$@"
