@@ -6,14 +6,14 @@ Vagrant.configure(2) do |config|
   config.vm.box = "xenial"
   config.vm.box_url = "https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-vagrant.box"
 
-  if Vagrant.has_plugin?("vagrant-proxyconf")
-    config.proxy.http     = ENV['http_proxy'] || ""
-    config.proxy.https    = ENV['https_proxy'] || ""
-    config.proxy.no_proxy = "localhost,127.0.0.1,.hpecorp.net"
-  end
+  #if Vagrant.has_plugin?("vagrant-proxyconf")
+  #  config.proxy.http     = ENV['http_proxy'] || ""
+  #  config.proxy.https    = ENV['https_proxy'] || ""
+  #  config.proxy.no_proxy = "localhost,127.0.0.1,.hpecorp.net"
+  #end
 
   config.vm.provider "virtualbox" do |v|
-    v.memory = 2048
+    v.memory = 4096
     v.cpus = 2
   end
 

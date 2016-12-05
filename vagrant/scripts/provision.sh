@@ -1,11 +1,13 @@
 #!/bin/bash
 
+cd ~
 git clone https://github.com/ojacques/chatopslab.git
 
-which curl docker make ruby || {
+which curl docker make ruby htop || {
   sudo apt-get update
-  sudo apt-get install -y curl docker.io make ruby
-  sudo usermod -a -G docker ubuntu
+  sudo apt-get install -y curl docker.io make ruby htop
+  sudo usermod -aG docker $(whoami)
+  newgrp docker
   sudo gem install rubyzip
 }
 
@@ -16,18 +18,16 @@ which docker-compose || {
 }
 
 which npm || {
-  sudo apt-get install nodejs
-  sudo apt-get install nodejs-legacy
-  sudo apt-get install npm
+  sudo apt-get install -y nodejs
+  sudo apt-get install -y nodejs-legacy
+  sudo apt-get install -y npm
 }
 
 which yo || {
-  cd ~/chatopslab
-  mkdir hubot && cd hubot
   sudo npm install -g yo generator-hubot
 }
 
-cd ~chatopslab/app
+cd ~/chatopslab/app
 echo "Waiting for Docker daemon to start"
 sleep 5
 docker-compose create
