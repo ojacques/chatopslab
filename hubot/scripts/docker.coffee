@@ -22,6 +22,13 @@ module.exports = (robot) ->
       when 'start'
         msg.send "Folks, start your engine! :checkered_flag:"
         runCommand msg, 'cd ~/chatopslab/app/;docker-compose start'
+  robot.respond /app logs on (.*) for (.*) lines/i, (msg) ->
+    app = msg.match[1]
+    lines = msg.match[2]
+    switch app
+      when 'cart'
+        msg.send "Folks, time to debug!"
+        runCommand msg, 'docker logs app_' + cart + '_1 --tail ' + lines
 
 # Run a shell command
 runCommand = (msg, cmd) ->
