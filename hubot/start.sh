@@ -1,4 +1,4 @@
 #!/bin/sh
 
-. ./.env
+. ./.env$INSTANCE
 ./bin/hubot --adapter slack
